@@ -1,15 +1,15 @@
 <root>
     <ruleSequence name="isExampleDomainResponse">
         <!--http://www.example.com/-->
-        <rule type="contains" value="Example Domain"/>
+        <rule type="contains" text="Example Domain"/>
         <rule type="and"/>
         <!--as we are looking for response only-->
-        <rule type="contains" value="200 OK"/>
+        <rule type="contains" text="200 OK"/>
     </ruleSequence>
 
     <replacementSequence name="titleReplacement">
-        <replacement key="Example Domain" value="The Greatest Domain Ever"/>
-        <replacement key="More information..." value="Stacy's new tattoo... "/>
+        <replacement key="Example Domain" text="The Greatest Domain Ever"/>
+        <replacement key="More information..." text="Stacy's new tattoo... "/>
     </replacementSequence>
     <processor>
         <message>
@@ -23,7 +23,7 @@
             <replacementSequences>
                 <replacementSequence reference="$titleReplacement"/>
                 <replacementSequence name="otherReplacement">
-                    <replacement key="This domain" value="This SATAN"/>
+                    <replacement key="This domain" text="This SATAN"/>
                 </replacementSequence>
             </replacementSequences>
         </message>
