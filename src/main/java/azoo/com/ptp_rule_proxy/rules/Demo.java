@@ -1,8 +1,8 @@
-package github.com.azubkov.ptp_rule_proxy;
+package azoo.com.ptp_rule_proxy.rules;
 
 
 import com.google.common.io.Resources;
-import github.com.azubkov.ptp_rule_proxy.generated.RootType;
+import azoo.com.ptp_rule_proxy.rules.generated.RootType;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -25,7 +25,7 @@ public class Demo {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 //        marshaller.marshal(rootType, System.out);
-        /*see  github.com.azubkov.ptp_rule_proxy.generated.ObjectFactory  _Root_QNAME*/
+        /*see  azoo.com.ptp_rule_proxy.rules.generated.ObjectFactory  _Root_QNAME*/
         marshaller.marshal(new JAXBElement(new QName("", "root"), RootType.class, rootType), System.out);
     }
 
