@@ -1,0 +1,34 @@
+package github.com.azubkov.ptp_rule_proxy;
+
+
+import com.google.common.io.Resources;
+import github.com.azubkov.ptp_rule_proxy.generated.RootType;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
+import java.net.URL;
+
+public class Demo {
+
+    public static void main(String[] args) throws Exception {
+        JAXBContext jc = JAXBContext.newInstance(RootType.class);
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+
+        URL url = Resources.getResource("processor_29-07-14.xml");
+        JAXBElement<RootType> jaxbRoot = (JAXBElement<RootType>) unmarshaller.unmarshal(url);
+        RootType rootType = jaxbRoot.getValue();
+        System.err.println("object: " + rootType);
+        System.err.println("object: " + rootType);
+//        RootType rootType = (RootType) unmarshaller.unmarshal(url);
+
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//        marshaller.marshal(rootType, System.out);
+        /*see  github.com.azubkov.ptp_rule_proxy.generated.ObjectFactory  _Root_QNAME*/
+        marshaller.marshal(new JAXBElement(new QName("", "root"), RootType.class, rootType), System.out);
+    }
+
+}

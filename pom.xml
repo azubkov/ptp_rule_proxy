@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>github.com.azubkov.ptp_proxy</groupId>
-    <artifactId>point-to-point-proxy</artifactId>
+    <groupId>github.com.azubkov.ptp_rule_proxy</groupId>
+    <artifactId>point-to-point-rule-proxy</artifactId>
     <version>3.0</version>
     <packaging>pom</packaging>
-    <name>point-to-point-proxy</name>
+    <name>point-to-point-rule-proxy</name>
 
     <properties>
         <javac.version>1.7</javac.version>
@@ -20,9 +20,9 @@
 
 
     <scm>
-        <url>https://github.com/azubkov/ptp_proxy</url>
-        <connection>scm:git:git://github.com/azubkov/ptp_proxy.git</connection>
-        <developerConnection>scm:git:git@github.com:azubkov/ptp_proxy.git</developerConnection>
+        <url>https://github.com/azubkov/ptp_rule_proxy</url>
+        <connection>scm:git:git://github.com/azubkov/ptp_rule_proxy.git</connection>
+        <developerConnection>scm:git:git@github.com:azubkov/ptp_rule_proxy.git</developerConnection>
     </scm>
 
     <build>
@@ -138,6 +138,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20090211</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
         </dependency>
     </dependencies>
 </project>
