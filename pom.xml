@@ -7,17 +7,12 @@
     <groupId>github.com.azubkov.ptp_rule_proxy</groupId>
     <artifactId>point-to-point-rule-proxy</artifactId>
     <version>3.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>point-to-point-rule-proxy</name>
 
     <properties>
         <javac.version>1.7</javac.version>
     </properties>
-
-    <modules>
-        <module>jar.xml</module>
-    </modules>
-
 
     <scm>
         <url>https://github.com/azubkov/ptp_rule_proxy</url>
@@ -77,32 +72,26 @@
                     </archive>
                 </configuration>
             </plugin>
-
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>github.com.azubkov.ptp_proxy.PTPProxyMain</mainClass>
-                        </manifest>
-                        <manifestEntries>
-                            <SVN-Revision>${buildNumber}</SVN-Revision>
-                            <Implementation-Version>${version}</Implementation-Version>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
                 <executions>
                     <execution>
-                        <id>make-my-jar-with-dependencies</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <finalName>uber-${artifactId}-${version}</finalName>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>github.com.azubkov.ptp_proxy.PTPProxyMain</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
             </plugin>
         </plugins>
     </build>
