@@ -88,7 +88,7 @@
                     <finalName>uber-${artifactId}-${version}</finalName>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>github.com.azubkov.ptp_proxy.PTPProxyMain</mainClass>
+                            <mainClass>azoo.com.ptp_rule_proxy.PTPProxyMain</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>

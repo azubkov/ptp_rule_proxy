@@ -13,9 +13,9 @@
 * License for the specific language governing permissions and limitations
 * under the License.
 */
-package github.com.azubkov.ptp_proxy.hex;
+package azoo.com.ptp_rule_proxy.hex;
 
-import github.com.azubkov.ptp_proxy.http.Utils;
+import azoo.com.ptp_rule_proxy.http.Utils;
 import org.apache.log4j.Logger;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;

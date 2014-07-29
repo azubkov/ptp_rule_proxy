@@ -23,15 +23,15 @@
         </layout>
     </appender>
 
-    <logger name="github.com.azubkov.ptp_proxy.PTPProxyMain">
+    <logger name="azoo.com.ptp_rule_proxy.PTPProxyMain">
         <level value="info"/>
     </logger>
 
-    <logger name="github.com.azubkov.ptp_proxy.hex.HexDumpProxyInboundHandler">
+    <logger name="azoo.com.ptp_rule_proxy.hex.HexDumpProxyInboundHandler">
         <level value="info"/>
     </logger>
 
-    <logger name="github.com.azubkov.ptp_proxy.http.HttpProxyInboundHandler">
+    <logger name="azoo.com.ptp_rule_proxy.http.HttpProxyInboundHandler">
         <level value="info"/>
     </logger>
 

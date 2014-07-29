@@ -1,6 +1,6 @@
-package github.com.azubkov.ptp_proxy.http;
+package azoo.com.ptp_rule_proxy.http;
 
-import github.com.azubkov.ptp_proxy.hex.HexDumpProxyInboundHandler;
+import azoo.com.ptp_rule_proxy.hex.HexDumpProxyInboundHandler;
 import org.apache.log4j.Logger;
 import org.jboss.netty.channel.*;
 import org.jboss.netty.channel.socket.ClientSocketChannelFactory;

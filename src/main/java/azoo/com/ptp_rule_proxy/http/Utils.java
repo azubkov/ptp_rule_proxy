@@ -1,4 +1,4 @@
-package github.com.azubkov.ptp_proxy.http;
+package azoo.com.ptp_rule_proxy.http;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.CompositeChannelBuffer;

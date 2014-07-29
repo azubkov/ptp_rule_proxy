@@ -13,7 +13,7 @@
 * License for the specific language governing permissions and limitations
 * under the License.
 */
-package github.com.azubkov.ptp_proxy.hex;
+package azoo.com.ptp_rule_proxy.hex;
 
 import static org.jboss.netty.channel.Channels.*;
 

@@ -1,4 +1,4 @@
-package github.com.azubkov.ptp_proxy;
+package azoo.com.ptp_rule_proxy;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.buffer.BigEndianHeapChannelBuffer;

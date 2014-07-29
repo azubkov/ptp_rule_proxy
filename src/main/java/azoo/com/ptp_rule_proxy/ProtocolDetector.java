@@ -1,8 +1,8 @@
-package github.com.azubkov.ptp_proxy;
+package azoo.com.ptp_rule_proxy;
 
-import github.com.azubkov.ptp_proxy.hex.HexDumpProxyInboundHandler;
-import github.com.azubkov.ptp_proxy.hex.HexDumpProxyPipelineFactory;
-import github.com.azubkov.ptp_proxy.http.HttpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.hex.HexDumpProxyInboundHandler;
+import azoo.com.ptp_rule_proxy.hex.HexDumpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
 import org.jboss.netty.buffer.BigEndianHeapChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.*;

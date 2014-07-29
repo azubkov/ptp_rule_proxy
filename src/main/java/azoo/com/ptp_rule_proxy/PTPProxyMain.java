@@ -1,7 +1,7 @@
-package github.com.azubkov.ptp_proxy;
+package azoo.com.ptp_rule_proxy;
 
-import github.com.azubkov.ptp_proxy.hex.HexDumpProxyPipelineFactory;
-import github.com.azubkov.ptp_proxy.http.HttpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.hex.HexDumpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
 import org.apache.log4j.Logger;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.ChannelPipeline;
