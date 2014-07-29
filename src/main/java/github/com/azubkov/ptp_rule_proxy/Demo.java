@@ -21,8 +21,6 @@ public class Demo {
         JAXBElement<RootType> jaxbRoot = (JAXBElement<RootType>) unmarshaller.unmarshal(url);
         RootType rootType = jaxbRoot.getValue();
         System.err.println("object: " + rootType);
-        System.err.println("object: " + rootType);
-//        RootType rootType = (RootType) unmarshaller.unmarshal(url);
 
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
