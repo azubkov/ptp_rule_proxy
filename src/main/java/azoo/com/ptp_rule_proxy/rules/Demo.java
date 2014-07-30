@@ -17,7 +17,7 @@ public class Demo {
         JAXBContext jc = JAXBContext.newInstance(RootType.class);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
 
-        URL url = Resources.getResource("processor_29-07-14.xml");
+        URL url = Resources.getResource("src/test/resources/processor_29-07-14.xml");
         JAXBElement<RootType> jaxbRoot = (JAXBElement<RootType>) unmarshaller.unmarshal(url);
         RootType rootType = jaxbRoot.getValue();
         System.err.println("object: " + rootType);
