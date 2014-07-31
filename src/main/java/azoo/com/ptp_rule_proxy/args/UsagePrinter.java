@@ -41,13 +41,12 @@ public class UsagePrinter implements InitializingBean {
         }
         String separator = "\n     ";
         StringBuilder sb = new StringBuilder();
-        sb.append("Known arguments are:");
-        sb.append(separator);
-        sb.append(argumentDictionary.printKnownArguments());
-        sb.append("use -D prefix to specify target parameter:");
-        sb.append(separator);
+        sb.append("Use -D prefix to specify target parameter:");
         sb.append(separator);
         sb.append("-Dlocal.port=8888 -Dremote.host=example.com -Dremote.port=80");
+        sb.append(separator);
+        sb.append("Known arguments are:");
+        sb.append(argumentDictionary.printKnownArguments());
         LOGGER.error(sb.toString());
     }
 }
