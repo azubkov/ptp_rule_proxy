@@ -14,9 +14,13 @@
         <property name="defaultArguments" ref="defaultArguments"/>
         <property name="argumentDictionary" ref="argumentDictionary"/>
     </bean>
-
     <bean id="fromFileArgumentDictionary" class="azoo.com.ptp_rule_proxy.args.dictionary.FromFileArgumentDictionary">
         <property name="properties" ref="argumentExplanations"/>
+    </bean>
+    <bean id="usagePrinter" class="azoo.com.ptp_rule_proxy.args.UsagePrinter">
+        <property name="defaultArgumentProvider" ref="defaultArgumentProvider"/>
+        <property name="argumentDictionary" ref="argumentDictionary"/>
+        <property name="argumentProvider" ref="argumentProvider"/>
     </bean>
 
     <bean id="defaultArguments" class="org.springframework.beans.factory.config.PropertiesFactoryBean">

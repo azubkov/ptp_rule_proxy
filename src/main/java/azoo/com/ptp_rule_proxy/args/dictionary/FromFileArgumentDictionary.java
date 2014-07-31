@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import java.util.Properties;
 
 public class FromFileArgumentDictionary implements ArgumentDictionary {
-    private static final Logger LOGGER = Logger.getLogger(PTPProxyMain.class);
+    private static final Logger LOGGER = Logger.getLogger(FromFileArgumentDictionary.class);
     private Properties properties;
 
     public void setProperties(Properties properties) {
@@ -38,13 +38,8 @@ public class FromFileArgumentDictionary implements ArgumentDictionary {
     public String printKnownArguments() {
         String separator = "\n     ";
         StringBuilder sb = new StringBuilder();
-        sb.append("Known arguments are:");
         sb.append(separator);
         sb.append(Joiner.on(separator).join(properties.entrySet()));
-        sb.append("use -D prefix to specify target parameter:");
-        sb.append(separator);
-        sb.append(separator);
-        sb.append("-Dlocal.port=8888 -Dremote.host=example.com -Dremote.port=80");
         return sb.toString();
     }
 }
