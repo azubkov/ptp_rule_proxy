@@ -1,0 +1,12 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="argumentProvider" class="azoo.com.ptp_rule_proxy.args.DArgumentProvider">
+        <property name="defaultArgumentProvider" ref="defaultArgumentProvider"/>
+    </bean>
+
+    <bean id="defaultArgumentProvider" class="azoo.com.ptp_rule_proxy.args.DefaultArgumentProvider"/>
+
+</beans>
