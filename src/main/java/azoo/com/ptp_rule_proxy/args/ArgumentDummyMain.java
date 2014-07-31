@@ -7,7 +7,7 @@ class ArgumentDummyMain {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/argumentmain.xml");
         ArgumentProvider argumentProvider = (ArgumentProvider) ctx.getBean("argumentProvider");
-        String result = argumentProvider.getArgument("loh");
+        String result = argumentProvider.getArgument("local.port");
         System.err.println("result: " + result);
         System.err.println("result: " + result);
     }

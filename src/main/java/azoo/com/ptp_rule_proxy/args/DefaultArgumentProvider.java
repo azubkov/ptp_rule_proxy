@@ -2,7 +2,7 @@ package azoo.com.ptp_rule_proxy.args;
 
 import java.util.Properties;
 
-public class DefaultArgumentProvider implements ArgumentProvider {
+public class DefaultArgumentProvider extends CheckedArgumentProvider {
     private Properties defaultArguments;
 
     public void setDefaultArguments(Properties defaultArguments) {
@@ -10,7 +10,7 @@ public class DefaultArgumentProvider implements ArgumentProvider {
     }
 
     @Override
-    public String getArgument(String name) {
+    public String getArgumentTemplate(String name) {
         return defaultArguments.getProperty(name);
     }
 }
