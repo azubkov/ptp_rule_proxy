@@ -1,5 +1,4 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
@@ -7,6 +6,15 @@
         <property name="defaultArgumentProvider" ref="defaultArgumentProvider"/>
     </bean>
 
-    <bean id="defaultArgumentProvider" class="azoo.com.ptp_rule_proxy.args.DefaultArgumentProvider"/>
+    <bean id="defaultArgumentProvider" class="azoo.com.ptp_rule_proxy.args.DefaultArgumentProvider">
+        <property name="defaultArguments" ref="defaultArguments"/>
+    </bean>
 
+    <bean id="defaultArguments" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:defaultArguments.properties</value>
+            </list>
+        </property>
+    </bean>
 </beans>
