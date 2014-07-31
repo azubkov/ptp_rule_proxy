@@ -1,6 +1,5 @@
 package azoo.com.ptp_rule_proxy;
 
-
 import com.google.common.io.Resources;
 
 import azoo.com.ptp_rule_proxy.generated.RootType;
