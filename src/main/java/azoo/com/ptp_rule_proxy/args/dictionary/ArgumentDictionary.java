@@ -7,5 +7,5 @@ public interface ArgumentDictionary {
 
     String  getDescription(String key);
 
-    void printUsage();
+    String printKnownArguments();
 }

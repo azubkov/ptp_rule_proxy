@@ -35,7 +35,7 @@ public class FromFileArgumentDictionary implements ArgumentDictionary {
     }
 
     @Override
-    public void printUsage() {
+    public String printKnownArguments() {
         String separator = "\n     ";
         StringBuilder sb = new StringBuilder();
         sb.append("Known arguments are:");
@@ -45,6 +45,6 @@ public class FromFileArgumentDictionary implements ArgumentDictionary {
         sb.append(separator);
         sb.append(separator);
         sb.append("-Dlocal.port=8888 -Dremote.host=example.com -Dremote.port=80");
-        LOGGER.error(sb.toString());
+        return sb.toString();
     }
 }

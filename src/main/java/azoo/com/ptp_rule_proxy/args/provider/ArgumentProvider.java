@@ -1,4 +1,4 @@
-package azoo.com.ptp_rule_proxy.args;
+package azoo.com.ptp_rule_proxy.args.provider;
 
 public interface ArgumentProvider {
     public String getArgument(String name);

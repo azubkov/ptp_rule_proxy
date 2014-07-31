@@ -1,6 +1,7 @@
 package azoo.com.ptp_rule_proxy.args;
 
 import azoo.com.ptp_rule_proxy.args.dictionary.ArgumentDictionary;
+import azoo.com.ptp_rule_proxy.args.provider.ArgumentProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,6 +14,6 @@ class ArgumentDummyMain {/*TODO move me to unit test, spring config as well*/
         System.err.println("result: " + result);
 
         ArgumentDictionary argumentDictionary = (ArgumentDictionary) ctx.getBean("argumentDictionary");
-        argumentDictionary.printUsage();
+        argumentDictionary.printKnownArguments();
     }
 }

@@ -5,12 +5,12 @@
     <alias name="dArgumentProvider" alias="argumentProvider"/>
     <alias name="fromFileArgumentDictionary" alias="argumentDictionary"/>
 
-    <bean id="dArgumentProvider" class="azoo.com.ptp_rule_proxy.args.DArgumentProvider">
+    <bean id="dArgumentProvider" class="azoo.com.ptp_rule_proxy.args.provider.DArgumentProvider">
         <property name="defaultArgumentProvider" ref="defaultArgumentProvider"/>
         <property name="argumentDictionary" ref="argumentDictionary"/>
     </bean>
 
-    <bean id="defaultArgumentProvider" class="azoo.com.ptp_rule_proxy.args.DefaultArgumentProvider">
+    <bean id="defaultArgumentProvider" class="azoo.com.ptp_rule_proxy.args.provider.DefaultArgumentProvider">
         <property name="defaultArguments" ref="defaultArguments"/>
         <property name="argumentDictionary" ref="argumentDictionary"/>
     </bean>

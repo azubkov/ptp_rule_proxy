@@ -1,4 +1,4 @@
-package azoo.com.ptp_rule_proxy.args;
+package azoo.com.ptp_rule_proxy.args.provider;
 
 import azoo.com.ptp_rule_proxy.args.dictionary.ArgumentDictionary;
 
