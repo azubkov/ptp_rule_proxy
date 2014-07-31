@@ -1,5 +1,6 @@
 package azoo.com.ptp_rule_proxy;
 
+import azoo.com.ptp_rule_proxy.args.provider.ArgumentProvider;
 import azoo.com.ptp_rule_proxy.hex.HexDumpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
 import org.apache.log4j.Logger;
@@ -10,6 +11,8 @@ import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.ClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.CollectionUtils;
 
 import java.net.InetSocketAddress;
@@ -21,19 +24,28 @@ import java.util.concurrent.Executors;
 9028 google.com 9028
 * */
 public class PTPProxyMain {
-    private static final Logger LOG = Logger.getLogger(PTPProxyMain.class);
+    private static final Logger LOGGER = Logger.getLogger(PTPProxyMain.class);
+    private ArgumentProvider argumentProvider;
+
+    public void setArgumentProvider(ArgumentProvider argumentProvider) {
+        this.argumentProvider = argumentProvider;
+    }
 
     public static void main(String[] args) throws Exception {
-        // Validate command line options.
-        if (args.length == 0) {
-//            showUsage();
-        }
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/ptpmain.xml");
+        PTPProxyMain mainRunner = (PTPProxyMain) ctx.getBean("mainRunner");
+
         // Parse command line options.
-        int localPort = Integer.parseInt(args[0]);
-        String remoteHost = args[1];
-        int remotePort = Integer.parseInt(args[2]);
-        LOG.info("[connection uid][current time mills]");
-        LOG.info(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
+        String value = null;
+        value = mainRunner.argumentProvider.getArgument("local.port");
+        int localPort = Integer.parseInt(value);
+        value = mainRunner.argumentProvider.getArgument("remote.host");
+        String remoteHost = value;
+        value = mainRunner.argumentProvider.getArgument("remote.port");
+        int remotePort = Integer.parseInt(value);
+
+        LOGGER.info("[connection uid][current time mills]");
+        LOGGER.info(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
         // Configure the bootstrap.
         Executor executor = Executors.newCachedThreadPool();
         ServerBootstrap sb = new ServerBootstrap(
@@ -60,10 +72,5 @@ public class PTPProxyMain {
 
         // Start up the server.
         sb.bind(new InetSocketAddress(localPort));
-    }
-
-    private void showUsage() {
-        LOG.error("Usage: " + PTPProxyMain.class.getSimpleName() +
-                " <local port> <remote host> <remote port>");
     }
 }
