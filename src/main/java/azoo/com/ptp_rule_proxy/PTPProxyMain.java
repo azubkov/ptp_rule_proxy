@@ -10,6 +10,7 @@ import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.ClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executor;
@@ -24,10 +25,8 @@ public class PTPProxyMain {
 
     public static void main(String[] args) throws Exception {
         // Validate command line options.
-        if (args.length != 3) {
-            LOG.error("Usage: " + PTPProxyMain.class.getSimpleName() +
-                            " <local port> <remote host> <remote port>");
-            return;
+        if (args.length == 0) {
+//            showUsage();
         }
         // Parse command line options.
         int localPort = Integer.parseInt(args[0]);
@@ -61,5 +60,10 @@ public class PTPProxyMain {
 
         // Start up the server.
         sb.bind(new InetSocketAddress(localPort));
+    }
+
+    private void showUsage() {
+        LOG.error("Usage: " + PTPProxyMain.class.getSimpleName() +
+                " <local port> <remote host> <remote port>");
     }
 }

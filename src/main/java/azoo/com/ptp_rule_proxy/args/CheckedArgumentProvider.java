@@ -1,5 +1,7 @@
 package azoo.com.ptp_rule_proxy.args;
 
+import azoo.com.ptp_rule_proxy.args.dictionary.ArgumentDictionary;
+
 public abstract class CheckedArgumentProvider implements ArgumentProvider {
     private ArgumentDictionary argumentDictionary;
 

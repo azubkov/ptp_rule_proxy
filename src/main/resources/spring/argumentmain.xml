@@ -15,7 +15,7 @@
         <property name="argumentDictionary" ref="argumentDictionary"/>
     </bean>
 
-    <bean id="fromFileArgumentDictionary" class="azoo.com.ptp_rule_proxy.args.FromFileArgumentDictionary">
+    <bean id="fromFileArgumentDictionary" class="azoo.com.ptp_rule_proxy.args.dictionary.FromFileArgumentDictionary">
         <property name="properties" ref="argumentExplanations"/>
     </bean>
 
