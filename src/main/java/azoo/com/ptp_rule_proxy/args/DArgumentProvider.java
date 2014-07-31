@@ -17,7 +17,7 @@ public class DArgumentProvider implements ArgumentProvider {
     public String getArgument(String name) {
         String value = System.getProperty(name);
         if (StringUtils.isBlank(value)) {
-            value = defaultArgumentProvider.getArgument(value);
+            value = defaultArgumentProvider.getArgument(name);
         }
         return value;
     }
