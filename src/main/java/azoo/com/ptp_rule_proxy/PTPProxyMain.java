@@ -36,23 +36,29 @@ public class PTPProxyMain {
         PTPProxyMain mainRunner = (PTPProxyMain) ctx.getBean("mainRunner");
 
         // Parse command line options.
-        String value = null;
-        value = mainRunner.argumentProvider.getArgument("local.port");
-        int localPort = Integer.parseInt(value);
-        value = mainRunner.argumentProvider.getArgument("remote.host");
-        String remoteHost = value;
-        value = mainRunner.argumentProvider.getArgument("remote.port");
-        int remotePort = Integer.parseInt(value);
-
-        LOGGER.info("[connection uid][current time mills]");
-        LOGGER.info(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
+        String value;
+        int localPort;
+        {
+            value = mainRunner.argumentProvider.getArgument("local.port");
+            localPort = Integer.parseInt(value);
+        }
+        String remoteHost;
+        {
+            value = mainRunner.argumentProvider.getArgument("remote.host");
+            remoteHost = value;
+        }
+        int remotePort;
+        {
+            value = mainRunner.argumentProvider.getArgument("remote.port");
+            remotePort = Integer.parseInt(value);
+        }
+        LOGGER.error(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
+        mainRunner.printUsage();
         // Configure the bootstrap.
         Executor executor = Executors.newCachedThreadPool();
-        ServerBootstrap sb = new ServerBootstrap(
-                new NioServerSocketChannelFactory(executor, executor));
+        ServerBootstrap sb = new ServerBootstrap(new NioServerSocketChannelFactory(executor, executor));
         // Set up the event pipeline factory.
-        ClientSocketChannelFactory cf =
-                new NioClientSocketChannelFactory(executor, executor);
+        ClientSocketChannelFactory cf = new NioClientSocketChannelFactory(executor, executor);
 //        sb.setPipelineFactory(
 //                new HexDumpProxyPipelineFactory(cf, remoteHost, remotePort));
 //        sb.setPipelineFactory(
@@ -72,5 +78,9 @@ public class PTPProxyMain {
 
         // Start up the server.
         sb.bind(new InetSocketAddress(localPort));
+    }
+
+    private void printUsage() {
+        LOGGER.error("[connection uid][current time mills]");
     }
 }
