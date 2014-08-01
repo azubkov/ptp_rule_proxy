@@ -13,16 +13,11 @@ import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.util.CollectionUtils;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/*run examples :
-7777 192.168.201.110 8090
-9028 google.com 9028
-* */
 public class PTPProxyMain {
     private static final Logger LOGGER = Logger.getLogger(PTPProxyMain.class);
     private ArgumentProvider argumentProvider;
@@ -32,7 +27,7 @@ public class PTPProxyMain {
     }
 
     public static void main(String[] args) throws Exception {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/ptpmain.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("ptpspring/ptpmain.xml");
         PTPProxyMain mainRunner = (PTPProxyMain) ctx.getBean("mainRunner");
 
         // Parse command line options.

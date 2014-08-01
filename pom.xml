@@ -166,7 +166,7 @@
                 </executions>
                 <configuration>
                     <!-- The schema directory or xsd files. -->
-                    <schemaDirectory>${basedir}/src/main/resources/xsd/</schemaDirectory>
+                    <schemaDirectory>${basedir}/src/main/resources/ptpxml/</schemaDirectory>
                     <!-- The package in which the source files will be generated. -->
                     <packageName>azoo.com.ptp_rule_proxy.generated</packageName>
                     <!-- The working directory to create the generated java source files. -->

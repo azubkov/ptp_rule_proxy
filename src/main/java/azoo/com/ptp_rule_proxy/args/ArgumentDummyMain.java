@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 class ArgumentDummyMain {/*TODO move me to unit test, spring config as well*/
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/argumentmain.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("ptpspring/argumentmain.xml");
         ArgumentProvider argumentProvider = (ArgumentProvider) ctx.getBean("argumentProvider");
         String result = argumentProvider.getArgument("local.port");
         System.err.println("result: " + result);
