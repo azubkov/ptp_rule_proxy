@@ -25,6 +25,10 @@ public class PTPProxyMain {
     private ArgumentProvider argumentProvider;
     private ReplacementBuilder replacementBuilder;
 
+    public void setReplacementBuilder(ReplacementBuilder replacementBuilder) {
+        this.replacementBuilder = replacementBuilder;
+    }
+
     public void setArgumentProvider(ArgumentProvider argumentProvider) {
         this.argumentProvider = argumentProvider;
     }

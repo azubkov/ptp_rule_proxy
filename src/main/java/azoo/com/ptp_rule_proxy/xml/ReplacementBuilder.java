@@ -4,6 +4,7 @@ import azoo.com.ptp_rule_proxy.generated.RootType;
 import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
 import com.google.common.io.Resources;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -20,7 +21,10 @@ public class ReplacementBuilder implements InitializingBean {
     private JAXBContext jaxBContext;
 
     public RootType toReplacement(String xml) {
-        RootType rootType = buildFromXml(xml);
+        RootType rootType = null;
+        if(!StringUtils.isBlank(xml)){
+            rootType = buildFromXml(xml);
+        }
         return Objects.firstNonNull(rootType, nullObject);
     }
 
@@ -30,7 +34,7 @@ public class ReplacementBuilder implements InitializingBean {
             JAXBElement<RootType> jaxbRoot = (JAXBElement<RootType>) unmarshaller.unmarshal(stringToInputStream(string));
             RootType rootType = jaxbRoot.getValue();
             return rootType;
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             LOGGER.error(e, e);
             return null;
         }
