@@ -1,7 +1,9 @@
 package azoo.com.ptp_rule_proxy.xml;
 
 import azoo.com.ptp_rule_proxy.generated.RootType;
+import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
+import com.google.common.io.Resources;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -9,10 +11,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -39,15 +38,25 @@ public class ReplacementBuilder implements InitializingBean {
         }
     }
 
-    private String readUrl(String urlAddress) {
+    private String readUrl(String string) {
         try {
-            URL url = new URL(urlAddress);
+            URL url = new URL(string);
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String message = org.apache.commons.io.IOUtils.toString(in);
             return message;
         } catch (Exception e) {
             LOGGER.error(e, e);
             return null;
+        }
+    }
+
+    public static String readResource(String path) {
+        try {
+            URL url = Resources.getResource(path);
+            String content = Resources.toString(url, Charsets.UTF_8);
+            return content;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -62,10 +71,16 @@ public class ReplacementBuilder implements InitializingBean {
     }
 
     private void prepareNullObject() {
-        String content = readUrl("nullObject.xml");
+        String content = readResource("ptpxml/nullObject.xml");
         nullObject = buildFromXml(content);
         if (nullObject == null) {
             throw new RuntimeException("cannot read null object sample");
         }
+    }
+
+    public static void main(String[] args) {
+        ReplacementBuilder replacementBuilder = new ReplacementBuilder();
+        replacementBuilder.prepareNullObject();
+        System.err.println("replacementBuilder.nullObject" + replacementBuilder.nullObject);
     }
 }
