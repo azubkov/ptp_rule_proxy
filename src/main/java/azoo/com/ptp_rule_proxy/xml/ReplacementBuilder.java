@@ -1,7 +1,9 @@
 package azoo.com.ptp_rule_proxy.xml;
 
 import azoo.com.ptp_rule_proxy.generated.RootType;
+import com.google.common.base.Objects;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -14,10 +16,17 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class ReplacementBuilder {
+public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
 
-    public RootType buildFromXml(String string) {
+    private RootType nullObject;
+
+    private RootType toReplacement(String xml) {
+        RootType rootType = buildFromXml(xml);
+        return Objects.firstNonNull(rootType, nullObject);
+    }
+
+    private RootType buildFromXml(String string) {
         try {
             JAXBContext jc = JAXBContext.newInstance(RootType.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
@@ -26,10 +35,9 @@ public class ReplacementBuilder {
             return rootType;
         } catch (JAXBException e) {
             LOGGER.error(e, e);
-            return nullObject();
+            return null;
         }
     }
-
 
     private String readUrl(String urlAddress) {
         try {
@@ -48,7 +56,16 @@ public class ReplacementBuilder {
         return stream;
     }
 
-    private RootType nullObject() {
-        return null;
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        prepareNullObject();
+    }
+
+    private void prepareNullObject() {
+        String content = readUrl("nullObject.xml");
+        nullObject = buildFromXml(content);
+        if (nullObject == null) {
+            throw new RuntimeException("cannot read null object sample");
+        }
     }
 }

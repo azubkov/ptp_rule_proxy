@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<root>
+    <ruleSequence name="empty"/>
+    <replacementSequence name="empty"/>
+    <processor>
+        <message>
+            <ruleSequences>
+                <ruleSequence reference="$empty"/>
+            </ruleSequences>
+            <replacementSequences>
+                <replacementSequence reference="$empty"/>
+            </replacementSequences>
+        </message>
+    </processor>
+</root>
