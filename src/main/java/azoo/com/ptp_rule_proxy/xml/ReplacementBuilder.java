@@ -7,10 +7,8 @@ import com.google.common.io.Resources;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
+import javax.xml.namespace.QName;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -19,16 +17,16 @@ public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
 
     private RootType nullObject;
+    private JAXBContext jaxBContext;
 
-    private RootType toReplacement(String xml) {
+    public RootType toReplacement(String xml) {
         RootType rootType = buildFromXml(xml);
         return Objects.firstNonNull(rootType, nullObject);
     }
 
     private RootType buildFromXml(String string) {
         try {
-            JAXBContext jc = JAXBContext.newInstance(RootType.class);
-            Unmarshaller unmarshaller = jc.createUnmarshaller();
+            Unmarshaller unmarshaller = jaxBContext.createUnmarshaller();
             JAXBElement<RootType> jaxbRoot = (JAXBElement<RootType>) unmarshaller.unmarshal(stringToInputStream(string));
             RootType rootType = jaxbRoot.getValue();
             return rootType;
@@ -67,6 +65,7 @@ public class ReplacementBuilder implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        jaxBContext = JAXBContext.newInstance(RootType.class);
         prepareNullObject();
     }
 
@@ -78,9 +77,25 @@ public class ReplacementBuilder implements InitializingBean {
         }
     }
 
-    public static void main(String[] args) {
+    public String toXml(RootType rootType) {
+        try {
+            Marshaller marshaller = jaxBContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        /*see  azoo.com.ptp_rule_proxy.rules.generated.ObjectFactory  _Root_QNAME*/
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            marshaller.marshal(new JAXBElement(new QName("", "root"), RootType.class, rootType), byteArrayOutputStream);
+
+            String string = byteArrayOutputStream.toString();
+            return string;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         ReplacementBuilder replacementBuilder = new ReplacementBuilder();
-        replacementBuilder.prepareNullObject();
-        System.err.println("replacementBuilder.nullObject" + replacementBuilder.nullObject);
+        replacementBuilder.afterPropertiesSet();
+        System.err.println("replacementBuilder.nullObject:\n" + replacementBuilder.nullObject);
+        System.err.println("replacementBuilder.nullObject xml:\n" + replacementBuilder.toXml(replacementBuilder.nullObject));
     }
 }

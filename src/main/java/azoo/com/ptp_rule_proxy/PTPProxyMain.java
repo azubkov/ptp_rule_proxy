@@ -1,8 +1,10 @@
 package azoo.com.ptp_rule_proxy;
 
 import azoo.com.ptp_rule_proxy.args.provider.ArgumentProvider;
+import azoo.com.ptp_rule_proxy.generated.RootType;
 import azoo.com.ptp_rule_proxy.hex.HexDumpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.xml.ReplacementBuilder;
 import org.apache.log4j.Logger;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.ChannelPipeline;
@@ -21,6 +23,7 @@ import java.util.concurrent.Executors;
 public class PTPProxyMain {
     private static final Logger LOGGER = Logger.getLogger(PTPProxyMain.class);
     private ArgumentProvider argumentProvider;
+    private ReplacementBuilder replacementBuilder;
 
     public void setArgumentProvider(ArgumentProvider argumentProvider) {
         this.argumentProvider = argumentProvider;
@@ -47,8 +50,16 @@ public class PTPProxyMain {
             value = mainRunner.argumentProvider.getArgument("remote.port");
             remotePort = Integer.parseInt(value);
         }
+        String replacementConfigFile;
+        {
+            value = mainRunner.argumentProvider.getArgument("replacement.config.file");
+            replacementConfigFile = value;
+        }
         LOGGER.error(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
         mainRunner.printUsage();
+
+        RootType rootType = mainRunner.replacementBuilder.toReplacement(replacementConfigFile);
+        LOGGER.info("XML used:\n" + mainRunner.replacementBuilder.toXml(rootType));
         // Configure the bootstrap.
         Executor executor = Executors.newCachedThreadPool();
         ServerBootstrap sb = new ServerBootstrap(new NioServerSocketChannelFactory(executor, executor));

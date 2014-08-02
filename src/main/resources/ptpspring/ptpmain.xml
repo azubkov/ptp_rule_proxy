@@ -42,5 +42,6 @@
     <bean id="ptpProxyMain" class="azoo.com.ptp_rule_proxy.PTPProxyMain">
         <property name="argumentProvider" ref="argumentProvider"/>
     </bean>
+    <bean id="replacementBuilder" class="azoo.com.ptp_rule_proxy.xml.ReplacementBuilder"/>
 
 </beans>
