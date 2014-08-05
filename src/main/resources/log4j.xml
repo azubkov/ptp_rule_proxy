@@ -15,7 +15,7 @@
         </filter>
     </appender>
     <appender name="ROLLING_FILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="ptp.log"/>
+        <param name="File" value="./target/log/ptp.log"/>
         <param name="MaxFileSize" value="20MB"/>
         <param name="MaxBackupIndex" value="20"/>
         <layout class="org.apache.log4j.PatternLayout">
