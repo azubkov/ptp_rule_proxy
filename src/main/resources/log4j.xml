@@ -31,7 +31,7 @@
         <level value="info"/>
     </logger>
 
-    <logger name="azoo.com.ptp_rule_proxy.http.HttpProxyInboundHandler">
+    <logger name="azoo.com.ptp_rule_proxy.handler.http.HttpProxyInboundHandler">
         <level value="info"/>
     </logger>
 

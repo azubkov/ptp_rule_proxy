@@ -15,7 +15,7 @@
 */
 package azoo.com.ptp_rule_proxy.handler.hex;
 
-import azoo.com.ptp_rule_proxy.http.Utils;
+import azoo.com.ptp_rule_proxy.handler.http.Utils;
 import org.apache.log4j.Logger;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;

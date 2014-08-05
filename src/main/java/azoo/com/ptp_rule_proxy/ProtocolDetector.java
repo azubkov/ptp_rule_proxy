@@ -2,7 +2,7 @@ package azoo.com.ptp_rule_proxy;
 
 import azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyInboundHandler;
 import azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyPipelineFactory;
-import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.handler.http.HttpProxyPipelineFactory;
 import org.jboss.netty.buffer.BigEndianHeapChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.*;

@@ -1,4 +1,4 @@
-package azoo.com.ptp_rule_proxy.http;
+package azoo.com.ptp_rule_proxy.handler.http;
 
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
