@@ -1,6 +1,6 @@
 package azoo.com.ptp_rule_proxy.http;
 
-import azoo.com.ptp_rule_proxy.hex.HexDumpProxyInboundHandler;
+import azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyInboundHandler;
 import org.apache.log4j.Logger;
 import org.jboss.netty.channel.*;
 import org.jboss.netty.channel.socket.ClientSocketChannelFactory;

@@ -13,7 +13,7 @@
 * License for the specific language governing permissions and limitations
 * under the License.
 */
-package azoo.com.ptp_rule_proxy.hex;
+package azoo.com.ptp_rule_proxy.handler.hex;
 
 import azoo.com.ptp_rule_proxy.http.Utils;
 import org.apache.log4j.Logger;

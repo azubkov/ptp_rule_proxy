@@ -27,7 +27,7 @@
         <level value="info"/>
     </logger>
 
-    <logger name="azoo.com.ptp_rule_proxy.hex.HexDumpProxyInboundHandler">
+    <logger name="azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyInboundHandler">
         <level value="info"/>
     </logger>
 
@@ -44,7 +44,7 @@
     <!--</category>-->
 
     <root>
-        <priority value="error"></priority>
+        <priority value="error"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING_FILE"/>
     </root>

@@ -2,7 +2,7 @@ package azoo.com.ptp_rule_proxy;
 
 import azoo.com.ptp_rule_proxy.args.provider.ArgumentProvider;
 import azoo.com.ptp_rule_proxy.generated.RootType;
-import azoo.com.ptp_rule_proxy.hex.HexDumpProxyPipelineFactory;
+import azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.http.HttpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.xml.ReplacementBuilder;
 import org.apache.log4j.Logger;
