@@ -52,7 +52,7 @@ public class ReplacementBuilder implements InitializingBean {
         }
     }
 
-    public static String readResource(String path) {
+    public String readResource(String path) {
         try {
             URL url = Resources.getResource(path);
             String content = Resources.toString(url, Charsets.UTF_8);
