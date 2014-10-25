@@ -3,7 +3,7 @@
     <ruleSequence name="isExampleDomainResponse">
         <!--http://www.example.com/-->
         <rule type="contains" text="Example Domain"/>
-        <rule type="and"/>
+        <!--<rule type="and"/>-->
         <!--as we are looking for response only-->
         <rule type="contains" text="200 OK"/>
     </ruleSequence>
