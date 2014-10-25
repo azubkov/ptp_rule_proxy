@@ -5,14 +5,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ReplacementBuilderTest {
-    private ReplacementBuilder replacementBuilder = new ReplacementBuilder();
+    private FileLoader fileLoader = new FileLoader();
 
     @Test
     public void test0() throws Exception {
         String address;
         address = "http://www.example.com/index.html";
         String content;
-        content = replacementBuilder.readUrl(address);
+        content = fileLoader.readUrl(address);
         assertNotNull(content);
         assertTrue(content.contains("Example Domain"));
     }
@@ -22,7 +22,7 @@ public class ReplacementBuilderTest {
         String address;
         address = "http://www.example.com/index.html";
         String content;
-        content = replacementBuilder.readFile(address);
+        content = fileLoader.readFile(address);
         System.err.println("should never be here!");
     }
 
@@ -31,7 +31,7 @@ public class ReplacementBuilderTest {
         String address;
         address = String.join(System.getProperty("file.separator"), System.getProperty("user.dir"), "pom.xml");
         String content;
-        content = replacementBuilder.readFile(address);
+        content = fileLoader.readFile(address);
         assertNotNull(content);
         assertTrue(content.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
     }
@@ -41,9 +41,8 @@ public class ReplacementBuilderTest {
         String address;
         address = "ptpxml/demo_29-07-14.xml";
         String content;
-        content =  replacementBuilder.readResource(address);
+        content =  fileLoader.readResource(address);
         assertNotNull(content);
         assertTrue(content.contains("<?xml version=\"1.0\"?>"));
     }
-
 }
