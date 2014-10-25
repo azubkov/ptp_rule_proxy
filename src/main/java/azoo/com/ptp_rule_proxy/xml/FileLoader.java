@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,7 +59,7 @@ public class FileLoader {
      * Accepts url, local files, jar resources
      */
     @NotNull
-    public String readContent(String path) {
+    public String readContent(String path) throws Exception {
         String content = null;
         Exception[] es = new Exception[3];
         try {
@@ -91,9 +92,17 @@ public class FileLoader {
             return content;
         }
         /*as we reach this point exceptions printout required*/
-        for (Exception e : es) {
+        throw new Exception(String.join("\n[or?] ", es[0].getMessage(), es[1].getMessage(), es[2].getMessage()));
+    }
+
+    @Nullable
+    public String readContentSafely(String path) {
+        try {
+            String string = readContent(path);
+            return string;
+        } catch (Exception e) {
             LOGGER.error(e, e);
+            return null;
         }
-        throw new RuntimeException(String.join("\n[or?] ", es[0].getMessage(), es[1].getMessage(), es[2].getMessage()));
     }
 }

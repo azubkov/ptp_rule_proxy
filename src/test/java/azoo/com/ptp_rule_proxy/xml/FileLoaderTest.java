@@ -84,4 +84,13 @@ public class FileLoaderTest {
         assertNotNull(content);
         assertTrue(content.contains("<?xml version=\"1.0\"?>"));
     }
+
+    @Test
+    public void test_readContent_4() throws Exception {
+        String address;
+        address = "AAAptpxml/demo_29-07-14.xml";
+        String content;
+        content =  fileLoader.readContentSafely(address);
+        assertNull(content);
+    }
 }
