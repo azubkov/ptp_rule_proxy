@@ -45,4 +45,43 @@ public class ReplacementBuilderTest {
         assertNotNull(content);
         assertTrue(content.contains("<?xml version=\"1.0\"?>"));
     }
+
+    @Test
+    public void test_readContent_0() throws Exception {
+        String address;
+        address = "http://www.example.com/index.html";
+        String content;
+        content = fileLoader.readContent(address);
+        assertNotNull(content);
+        assertTrue(content.contains("Example Domain"));
+    }
+
+    @Test(expected = Exception.class)
+    public void test_readContent_1() throws Exception {
+        String address;
+        address = "AAhttp://www.example.com/index.html";
+        String content;
+        content = fileLoader.readContent(address);
+        System.err.println("should never be here!");
+    }
+
+    @Test
+    public void test_readContent_2() throws Exception {
+        String address;
+        address = String.join(System.getProperty("file.separator"), System.getProperty("user.dir"), "pom.xml");
+        String content;
+        content = fileLoader.readContent(address);
+        assertNotNull(content);
+        assertTrue(content.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
+    }
+
+    @Test
+    public void test_readContent_3() throws Exception {
+        String address;
+        address = "ptpxml/demo_29-07-14.xml";
+        String content;
+        content =  fileLoader.readContent(address);
+        assertNotNull(content);
+        assertTrue(content.contains("<?xml version=\"1.0\"?>"));
+    }
 }
