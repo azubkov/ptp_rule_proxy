@@ -39,7 +39,7 @@ public class FileLoaderTest {
     @Test
     public void test3() throws Exception {
         String address;
-        address = "ptpxml/demo_29-07-14.xml";
+        address = "ptpxml/demo_0.xml";
         String content;
         content =  fileLoader.readResource(address);
         assertNotNull(content);
@@ -78,7 +78,7 @@ public class FileLoaderTest {
     @Test
     public void test_readContent_3() throws Exception {
         String address;
-        address = "ptpxml/demo_29-07-14.xml";
+        address = "ptpxml/demo_0.xml";
         String content;
         content =  fileLoader.readContent(address);
         assertNotNull(content);
@@ -88,7 +88,7 @@ public class FileLoaderTest {
     @Test
     public void test_readContent_4() throws Exception {
         String address;
-        address = "AAAptpxml/demo_29-07-14.xml";
+        address = "AAAptpxml/demo_0.xml";
         String content;
         content =  fileLoader.readContentSafely(address);
         assertNull(content);

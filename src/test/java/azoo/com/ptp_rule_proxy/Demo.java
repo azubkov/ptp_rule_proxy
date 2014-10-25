@@ -20,7 +20,7 @@ public class Demo {
 
     @Test
     public void test0() throws Exception {
-        String xml = fileLoader.readResource("ptpxml/demo_29-07-14.xml");
+        String xml = fileLoader.readResource("ptpxml/demo_0.xml");
         RootType rootType = replacementBuilder.toReplacement(xml);
         System.err.println("rootType: " + rootType);
         String string = replacementBuilder.toXml(rootType);
@@ -29,7 +29,7 @@ public class Demo {
 
     @Test
     public void test1() throws Exception {
-        String xml = fileLoader.readContent("ptpxml/demo_25-10-14.xml");
+        String xml = fileLoader.readContent("ptpxml/demo_1.xml");
         RootType rootType = replacementBuilder.toReplacement(xml);
         System.err.println("rootType: " + rootType);
         String string = replacementBuilder.toXml(rootType);
