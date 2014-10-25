@@ -36,4 +36,14 @@ public class ReplacementBuilderTest {
         assertTrue(content.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
     }
 
+    @Test
+    public void test3() throws Exception {
+        String address;
+        address = "ptpxml/demo_29-07-14.xml";
+        String content;
+        content =  replacementBuilder.readResource(address);
+        assertNotNull(content);
+        assertTrue(content.contains("<?xml version=\"1.0\"?>"));
+    }
+
 }
