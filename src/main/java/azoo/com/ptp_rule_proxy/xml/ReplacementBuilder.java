@@ -14,6 +14,9 @@ import javax.xml.namespace.QName;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
@@ -41,18 +44,6 @@ public class ReplacementBuilder implements InitializingBean {
         }
     }
 
-//    public String readUrl(String string) {
-//        try {
-//            URL url = new URL(string);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-//            String message = org.apache.commons.io.IOUtils.toString(in);
-//            return message;
-//        } catch (Exception e) {
-//            LOGGER.error(e, e);
-//            return null;
-//        }
-//    }
-
     public String readUrl(String string) throws Exception {
         try {
             URL url = new URL(string);
@@ -60,12 +51,24 @@ public class ReplacementBuilder implements InitializingBean {
                 String message = org.apache.commons.io.IOUtils.toString(in);
                 return message;
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new Exception(e);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         }
     }
+
+    public String readFile(String filePath) throws Exception {
+        try {
+            Path path = Paths.get(filePath);
+            byte[] bytes = Files.readAllBytes(path);
+            String string = new String(bytes);
+            return string;
+        } catch (IOException e) {
+            throw new Exception(e);
+        }
+    }
+
 
     public String readResource(String path) {
         try {
