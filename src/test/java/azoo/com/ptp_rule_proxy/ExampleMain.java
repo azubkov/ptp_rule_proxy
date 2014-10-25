@@ -1,7 +1,6 @@
 package azoo.com.ptp_rule_proxy;
 
 public class ExampleMain {
-
     public static void main(String[] args) throws Exception {
         System.setProperty("local.port", "1235");
         System.setProperty("remote.port", "80");
