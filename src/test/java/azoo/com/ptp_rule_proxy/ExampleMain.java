@@ -9,8 +9,8 @@ public class ExampleMain {
         System.setProperty("replacement.config.file", String.join("", System.getProperty("user.dir"), "/target/test-classes/ptpxml/demo_29-07-14.xml"));
 
         PTPProxyMain.main(args);
-        System.out.println("now commands are available:");
-        System.out.println("wget localhost:1235");
-        System.out.println("firefox localhost:1235");
+        System.err.println("now commands are available:");
+        System.err.println("wget localhost:1235");
+        System.err.println("firefox localhost:1235");
     }
 }
