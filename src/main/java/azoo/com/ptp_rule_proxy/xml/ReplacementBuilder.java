@@ -6,6 +6,7 @@ import com.google.common.base.Objects;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.xml.bind.*;
@@ -20,9 +21,9 @@ public class ReplacementBuilder implements InitializingBean {
     private RootType nullObject;
     private JAXBContext jaxBContext;
 
-    public RootType toReplacement(String xml) {
+    public RootType toReplacement(@Nullable String xml) {
         RootType rootType = null;
-        if(!StringUtils.isBlank(xml)){
+        if (!StringUtils.isBlank(xml)) {
             rootType = buildFromXml(xml);
         }
         return Objects.firstNonNull(rootType, nullObject);
@@ -40,15 +41,29 @@ public class ReplacementBuilder implements InitializingBean {
         }
     }
 
-    private String readUrl(String string) {
+//    public String readUrl(String string) {
+//        try {
+//            URL url = new URL(string);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+//            String message = org.apache.commons.io.IOUtils.toString(in);
+//            return message;
+//        } catch (Exception e) {
+//            LOGGER.error(e, e);
+//            return null;
+//        }
+//    }
+
+    public String readUrl(String string) throws Exception {
         try {
             URL url = new URL(string);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            String message = org.apache.commons.io.IOUtils.toString(in);
-            return message;
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
+                String message = org.apache.commons.io.IOUtils.toString(in);
+                return message;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } catch (Exception e) {
-            LOGGER.error(e, e);
-            return null;
+            throw new RuntimeException(e);
         }
     }
 

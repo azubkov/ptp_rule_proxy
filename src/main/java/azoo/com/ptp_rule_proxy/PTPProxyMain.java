@@ -62,7 +62,8 @@ public class PTPProxyMain {
         LOGGER.error(String.format("Proxying *:%d to %s:%d ...", localPort, remoteHost, remotePort));
         mainRunner.printUsage();
 
-        RootType rootType = mainRunner.replacementBuilder.toReplacement(replacementConfigFile);
+        String xml = mainRunner.replacementBuilder.readUrl(replacementConfigFile);
+        RootType rootType = mainRunner.replacementBuilder.toReplacement(xml);
         LOGGER.info("XML used:\n" + mainRunner.replacementBuilder.toXml(rootType));
         // Configure the bootstrap.
         Executor executor = Executors.newCachedThreadPool();

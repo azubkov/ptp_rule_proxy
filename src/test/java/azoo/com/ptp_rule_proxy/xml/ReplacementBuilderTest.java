@@ -6,7 +6,7 @@ public class ReplacementBuilderTest {
     private ReplacementBuilder replacementBuilder = new ReplacementBuilder();
 
     @Test
-    public void test0() {
+    public void test0() throws Exception {
         String address;
         address = "http://www.example.com/index.html";
         String content;
