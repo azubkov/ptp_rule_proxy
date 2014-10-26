@@ -4,6 +4,7 @@ import azoo.com.ptp_rule_proxy.generated.RootType;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -20,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
 
-    private RootType nullObject;
+    private ReplacementWrapper nullObject;
     private JAXBContext jaxBContext;
     private FileLoader fileLoader;
 
@@ -28,12 +29,34 @@ public class ReplacementBuilder implements InitializingBean {
         this.fileLoader = fileLoader;
     }
 
-    public RootType toReplacement(@Nullable String xml) {
-        RootType rootType = null;
-        if (!StringUtils.isBlank(xml)) {
-            rootType = buildFromXml(xml);
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        jaxBContext = JAXBContext.newInstance(RootType.class);
+        prepareNullObject();
+    }
+
+    private void prepareNullObject() {
+        String content = fileLoader.readResource("ptpxml/nullObject.xml");
+        RootType rootType = buildFromXml(content);
+        nullObject = toWrapper(rootType);
+        if (nullObject == null) {
+            throw new RuntimeException("cannot create null object sample");
         }
-        return Objects.firstNonNull(rootType, nullObject);
+    }
+
+    private ReplacementWrapper toWrapper(RootType rootType) {
+        ReplacementWrapper replacementWrapper = new ReplacementWrapper();
+        replacementWrapper.setRootType(rootType);
+        return replacementWrapper;
+    }
+
+    public ReplacementWrapper toReplacement(@Nullable String xml) {
+        ReplacementWrapper replacementWrapper = null;
+        if (!StringUtils.isBlank(xml)) {
+            RootType rootType = buildFromXml(xml);
+            replacementWrapper = toWrapper(rootType);
+        }
+        return Objects.firstNonNull(replacementWrapper, nullObject);
     }
 
     private RootType buildFromXml(String string) {
@@ -53,18 +76,9 @@ public class ReplacementBuilder implements InitializingBean {
         return stream;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        jaxBContext = JAXBContext.newInstance(RootType.class);
-        prepareNullObject();
-    }
-
-    private void prepareNullObject() {
-        String content = fileLoader.readResource("ptpxml/nullObject.xml");
-        nullObject = buildFromXml(content);
-        if (nullObject == null) {
-            throw new RuntimeException("cannot read null object sample");
-        }
+    @NotNull
+    public String toXml(ReplacementWrapper replacementWrapper) {
+        return toXml(replacementWrapper.getRootType());
     }
 
     public String toXml(RootType rootType) {
@@ -80,12 +94,5 @@ public class ReplacementBuilder implements InitializingBean {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        ReplacementBuilder replacementBuilder = new ReplacementBuilder();
-        replacementBuilder.afterPropertiesSet();
-        System.err.println("replacementBuilder.nullObject:\n" + replacementBuilder.nullObject);
-        System.err.println("replacementBuilder.nullObject xml:\n" + replacementBuilder.toXml(replacementBuilder.nullObject));
     }
 }

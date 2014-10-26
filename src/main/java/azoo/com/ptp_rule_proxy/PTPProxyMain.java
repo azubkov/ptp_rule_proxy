@@ -6,6 +6,7 @@ import azoo.com.ptp_rule_proxy.handler.hex.HexDumpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.handler.http.HttpProxyPipelineFactory;
 import azoo.com.ptp_rule_proxy.xml.FileLoader;
 import azoo.com.ptp_rule_proxy.xml.ReplacementBuilder;
+import azoo.com.ptp_rule_proxy.xml.ReplacementWrapper;
 import org.apache.log4j.Logger;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.ChannelPipeline;
@@ -69,8 +70,8 @@ public class PTPProxyMain {
         mainRunner.printUsage();
         String xml= mainRunner.fileLoader.readContentSafely(replacementConfigFile);
 
-        RootType rootType = mainRunner.replacementBuilder.toReplacement(xml);
-        LOGGER.info("XML used:\n" + mainRunner.replacementBuilder.toXml(rootType));
+        ReplacementWrapper replacementWrapper = mainRunner.replacementBuilder.toReplacement(xml);
+        LOGGER.info("XML used:\n" + mainRunner.replacementBuilder.toXml(replacementWrapper));
         // Configure the bootstrap.
         Executor executor = Executors.newCachedThreadPool();
         ServerBootstrap sb = new ServerBootstrap(new NioServerSocketChannelFactory(executor, executor));

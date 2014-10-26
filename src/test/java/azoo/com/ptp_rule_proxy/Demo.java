@@ -1,8 +1,8 @@
 package azoo.com.ptp_rule_proxy;
 
-import azoo.com.ptp_rule_proxy.generated.RootType;
 import azoo.com.ptp_rule_proxy.xml.FileLoader;
 import azoo.com.ptp_rule_proxy.xml.ReplacementBuilder;
+import azoo.com.ptp_rule_proxy.xml.ReplacementWrapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,18 +21,18 @@ public class Demo {
     @Test
     public void test0() throws Exception {
         String xml = fileLoader.readResource("ptpxml/demo_0.xml");
-        RootType rootType = replacementBuilder.toReplacement(xml);
-        System.err.println("rootType: " + rootType);
-        String string = replacementBuilder.toXml(rootType);
+        ReplacementWrapper replacementWrapper = replacementBuilder.toReplacement(xml);
+        System.err.println("replacementWrapper: " + replacementWrapper);
+        String string = replacementBuilder.toXml(replacementWrapper);
         System.err.println("string: " + string);
     }
 
     @Test
-    public void test1() throws Exception {
+    public void test_DollarReplacement() throws Exception {
         String xml = fileLoader.readContent("ptpxml/demo_1.xml");
-        RootType rootType = replacementBuilder.toReplacement(xml);
-        System.err.println("rootType: " + rootType);
-        String string = replacementBuilder.toXml(rootType);
+        ReplacementWrapper replacementWrapper = replacementBuilder.toReplacement(xml);
+        System.err.println("replacementWrapper: " + replacementWrapper);
+        String string = replacementBuilder.toXml(replacementWrapper);
         System.err.println("string: " + string);
     }
 }
