@@ -38,5 +38,21 @@
                 </replacementSequence>
             </replacementSequences>
         </message>
+
+        <message>
+            <ruleSequences>
+                <ruleSequence reference="$isExampleDomainResponse"/>
+                <ruleSequence name="alwaysTrue">
+                    <!--dummy true rule-->
+                    <rule type="true"/>
+                </ruleSequence>
+            </ruleSequences>
+            <replacementSequences>
+                <replacementSequence reference="$titleReplacement"/>
+                <replacementSequence name="otherReplacement">
+                    <replacement key="This domain" text="This SATAN"/>
+                </replacementSequence>
+            </replacementSequences>
+        </message>
     </processor>
 </root>
