@@ -4,14 +4,17 @@ import azoo.com.ptp_rule_proxy.generated.MessageType;
 import azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType;
 import azoo.com.ptp_rule_proxy.generated.RootType;
 import azoo.com.ptp_rule_proxy.generated.RuleSequenceType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface Linearizer<T> {
     List<T> linearize(RootType rootType);
 
-    public static class ReplacementSequenceTypeLinearizer implements Linearizer<ReplacementSequenceType> {
+    static class ReplacementSequenceTypeLinearizer implements Linearizer<ReplacementSequenceType> {
         @Override
         public List<ReplacementSequenceType> linearize(RootType rootType) {
             List<ReplacementSequenceType> result = new ArrayList<>();
@@ -27,7 +30,7 @@ public interface Linearizer<T> {
         }
     }
 
-    public static class RuleSequenceTypeLinearizer implements Linearizer<RuleSequenceType> {
+    static class RuleSequenceTypeLinearizer implements Linearizer<RuleSequenceType> {
         @Override
         public List<RuleSequenceType> linearize(RootType rootType) {
             List<RuleSequenceType> result = new ArrayList<>();
@@ -40,6 +43,24 @@ public interface Linearizer<T> {
                 }
             }
             return result;
+        }
+    }
+
+    static class Methods {
+
+        static <T> Map<String, T> toMap(List<T> list, NameExtractor<T> nameExtractor) {
+            Map<String, T> map = new HashMap<>();
+            for (T t : list) {
+                String s = nameExtractor.getName(t);
+                if (StringUtils.isBlank(s)) {
+                    continue;
+                }
+                Object o = map.put(s, t);
+                if (o != null) {
+                    throw new IllegalArgumentException(String.format("Duplicate element name observed: %s", s));
+                }
+            }
+            return map;
         }
     }
 }
