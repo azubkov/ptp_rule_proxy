@@ -27,19 +27,9 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper nullObject;
     private JAXBContext jaxBContext;
     private FileLoader fileLoader;
-    private Linearizer.ReplacementSequenceTypeLinearizer replacementSequenceTypeLinearizer;
-    private Linearizer.RuleSequenceTypeLinearizer ruleSequenceTypeLinearizer;
 
     public void setFileLoader(FileLoader fileLoader) {
         this.fileLoader = fileLoader;
-    }
-
-    public void setReplacementSequenceTypeLinearizer(Linearizer.ReplacementSequenceTypeLinearizer replacementSequenceTypeLinearizer) {
-        this.replacementSequenceTypeLinearizer = replacementSequenceTypeLinearizer;
-    }
-
-    public void setRuleSequenceTypeLinearizer(Linearizer.RuleSequenceTypeLinearizer ruleSequenceTypeLinearizer) {
-        this.ruleSequenceTypeLinearizer = ruleSequenceTypeLinearizer;
     }
 
     @Override
@@ -60,9 +50,10 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper toWrapper(RootType rootType) {
         ReplacementWrapper replacementWrapper = new ReplacementWrapper();
         replacementWrapper.setRootType(rootType);
-        List<ReplacementSequenceType> list = replacementSequenceTypeLinearizer.linearize(rootType);
+        List<ReplacementSequenceType> list = Linearizer.ReplacementSequenceTypeLinearizer.getInstance().linearize(rootType);
+//        Linearizer.Methods.toMap(list, )
 //        replacementWrapper.
-        List<RuleSequenceType> list2 = ruleSequenceTypeLinearizer.linearize(rootType);
+        List<RuleSequenceType> list2 = Linearizer.RuleSequenceTypeLinearizer.getInstance().linearize(rootType);
 
 //        List<RuleSequenceType> ruleSequenceList= toLinearRuleSequence(rootType);
 //        toLinearReplacementSequence(rootType);

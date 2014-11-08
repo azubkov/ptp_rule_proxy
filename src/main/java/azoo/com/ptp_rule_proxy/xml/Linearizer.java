@@ -15,6 +15,12 @@ public interface Linearizer<T> {
     List<T> linearize(RootType rootType);
 
     static class ReplacementSequenceTypeLinearizer implements Linearizer<ReplacementSequenceType> {
+        private static final ReplacementSequenceTypeLinearizer INSTANCE = new ReplacementSequenceTypeLinearizer();
+
+        public static ReplacementSequenceTypeLinearizer getInstance() {
+            return INSTANCE;
+        }
+
         @Override
         public List<ReplacementSequenceType> linearize(RootType rootType) {
             List<ReplacementSequenceType> result = new ArrayList<>();
@@ -31,6 +37,12 @@ public interface Linearizer<T> {
     }
 
     static class RuleSequenceTypeLinearizer implements Linearizer<RuleSequenceType> {
+        private static final RuleSequenceTypeLinearizer INSTANCE = new RuleSequenceTypeLinearizer();
+
+        public static RuleSequenceTypeLinearizer getInstance() {
+            return INSTANCE;
+        }
+
         @Override
         public List<RuleSequenceType> linearize(RootType rootType) {
             List<RuleSequenceType> result = new ArrayList<>();
