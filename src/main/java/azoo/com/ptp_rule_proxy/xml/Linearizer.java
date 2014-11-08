@@ -11,7 +11,7 @@ import java.util.List;
 public interface Linearizer<T> {
     List<T> linearize(RootType rootType);
 
-    static class FromReplacementSequenceType implements Linearizer<ReplacementSequenceType> {
+    public static class ReplacementSequenceTypeLinearizer implements Linearizer<ReplacementSequenceType> {
         @Override
         public List<ReplacementSequenceType> linearize(RootType rootType) {
             List<ReplacementSequenceType> result = new ArrayList<>();
@@ -27,7 +27,7 @@ public interface Linearizer<T> {
         }
     }
 
-    static class FromRuleSequenceType implements Linearizer<RuleSequenceType> {
+    public static class RuleSequenceTypeLinearizer implements Linearizer<RuleSequenceType> {
         @Override
         public List<RuleSequenceType> linearize(RootType rootType) {
             List<RuleSequenceType> result = new ArrayList<>();

@@ -1,6 +1,8 @@
 package azoo.com.ptp_rule_proxy.xml;
 
+import azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType;
 import azoo.com.ptp_rule_proxy.generated.RootType;
+import azoo.com.ptp_rule_proxy.generated.RuleSequenceType;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -17,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
@@ -24,9 +27,19 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper nullObject;
     private JAXBContext jaxBContext;
     private FileLoader fileLoader;
+    private Linearizer.ReplacementSequenceTypeLinearizer replacementSequenceTypeLinearizer;
+    private Linearizer.RuleSequenceTypeLinearizer ruleSequenceTypeLinearizer;
 
     public void setFileLoader(FileLoader fileLoader) {
         this.fileLoader = fileLoader;
+    }
+
+    public void setReplacementSequenceTypeLinearizer(Linearizer.ReplacementSequenceTypeLinearizer replacementSequenceTypeLinearizer) {
+        this.replacementSequenceTypeLinearizer = replacementSequenceTypeLinearizer;
+    }
+
+    public void setRuleSequenceTypeLinearizer(Linearizer.RuleSequenceTypeLinearizer ruleSequenceTypeLinearizer) {
+        this.ruleSequenceTypeLinearizer = ruleSequenceTypeLinearizer;
     }
 
     @Override
@@ -47,7 +60,19 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper toWrapper(RootType rootType) {
         ReplacementWrapper replacementWrapper = new ReplacementWrapper();
         replacementWrapper.setRootType(rootType);
+        List<ReplacementSequenceType> list = replacementSequenceTypeLinearizer.linearize(rootType);
+//        replacementWrapper.
+        List<RuleSequenceType> list2 = ruleSequenceTypeLinearizer.linearize(rootType);
+
+//        List<RuleSequenceType> ruleSequenceList= toLinearRuleSequence(rootType);
+//        toLinearReplacementSequence(rootType);
         return replacementWrapper;
+    }
+
+    private void toLinear(RootType rootType) {
+        rootType.getRuleSequence();
+        rootType.getReplacementSequence();
+
     }
 
     public ReplacementWrapper toReplacement(@Nullable String xml) {

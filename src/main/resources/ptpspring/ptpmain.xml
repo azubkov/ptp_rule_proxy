@@ -48,6 +48,10 @@
     </bean>
     <bean id="replacementBuilder" class="azoo.com.ptp_rule_proxy.xml.ReplacementBuilder">
         <property name="fileLoader" ref="fileLoader"/>
+        <property name="replacementSequenceTypeLinearizer" ref="replacementSequenceTypeLinearizer"/>
+        <property name="ruleSequenceTypeLinearizer" ref="ruleSequenceTypeLinearizer"/>
     </bean>
     <bean id="fileLoader" class="azoo.com.ptp_rule_proxy.xml.FileLoader"/>
+    <bean id="replacementSequenceTypeLinearizer" class="azoo.com.ptp_rule_proxy.xml.Linearizer$ReplacementSequenceTypeLinearizer"/>
+    <bean id="ruleSequenceTypeLinearizer" class="azoo.com.ptp_rule_proxy.xml.Linearizer$RuleSequenceTypeLinearizer"/>
 </beans>
