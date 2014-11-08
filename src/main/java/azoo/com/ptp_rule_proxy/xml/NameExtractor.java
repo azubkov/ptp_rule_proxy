@@ -3,10 +3,10 @@ package azoo.com.ptp_rule_proxy.xml;
 public interface NameExtractor<T> {
     String getName(T t);
 
-    static class FromReplacementSequenceType implements NameExtractor<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> {
-        private static final FromReplacementSequenceType INSTANCE = new FromReplacementSequenceType();
+    static class toReplacementSequenceType implements NameExtractor<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> {
+        private static final toReplacementSequenceType INSTANCE = new toReplacementSequenceType();
 
-        public static FromReplacementSequenceType getInstance() {
+        public static toReplacementSequenceType getInstance() {
             return INSTANCE;
         }
 
@@ -16,10 +16,10 @@ public interface NameExtractor<T> {
         }
     }
 
-    static class FromRuleSequenceType implements NameExtractor<azoo.com.ptp_rule_proxy.generated.RuleSequenceType> {
-        private static final FromRuleSequenceType INSTANCE = new FromRuleSequenceType();
+    static class toRuleSequenceType implements NameExtractor<azoo.com.ptp_rule_proxy.generated.RuleSequenceType> {
+        private static final toRuleSequenceType INSTANCE = new toRuleSequenceType();
 
-        public static FromRuleSequenceType getInstance() {
+        public static toRuleSequenceType getInstance() {
             return INSTANCE;
         }
 

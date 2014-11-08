@@ -50,10 +50,10 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper toWrapper(RootType rootType) {
         ReplacementWrapper replacementWrapper = new ReplacementWrapper();
         replacementWrapper.setRootType(rootType);
-        List<ReplacementSequenceType> list = Linearizer.ReplacementSequenceTypeLinearizer.getInstance().linearize(rootType);
+        List<ReplacementSequenceType> list = Linearizer.toReplacementSequenceType.getInstance().linearize(rootType);
 //        Linearizer.Methods.toMap(list, )
 //        replacementWrapper.
-        List<RuleSequenceType> list2 = Linearizer.RuleSequenceTypeLinearizer.getInstance().linearize(rootType);
+        List<RuleSequenceType> list2 = Linearizer.toRuleSequenceType.getInstance().linearize(rootType);
 
 //        List<RuleSequenceType> ruleSequenceList= toLinearRuleSequence(rootType);
 //        toLinearReplacementSequence(rootType);

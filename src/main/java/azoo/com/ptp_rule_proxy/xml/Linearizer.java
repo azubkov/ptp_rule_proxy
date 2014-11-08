@@ -1,7 +1,6 @@
 package azoo.com.ptp_rule_proxy.xml;
 
 import azoo.com.ptp_rule_proxy.generated.MessageType;
-import azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType;
 import azoo.com.ptp_rule_proxy.generated.RootType;
 import azoo.com.ptp_rule_proxy.generated.RuleSequenceType;
 import org.apache.commons.lang3.StringUtils;
@@ -14,21 +13,21 @@ import java.util.Map;
 public interface Linearizer<T> {
     List<T> linearize(RootType rootType);
 
-    static class ReplacementSequenceTypeLinearizer implements Linearizer<ReplacementSequenceType> {
-        private static final ReplacementSequenceTypeLinearizer INSTANCE = new ReplacementSequenceTypeLinearizer();
+    static class toReplacementSequenceType implements Linearizer<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> {
+        private static final toReplacementSequenceType INSTANCE = new toReplacementSequenceType();
 
-        public static ReplacementSequenceTypeLinearizer getInstance() {
+        public static toReplacementSequenceType getInstance() {
             return INSTANCE;
         }
 
         @Override
-        public List<ReplacementSequenceType> linearize(RootType rootType) {
-            List<ReplacementSequenceType> result = new ArrayList<>();
-            for (ReplacementSequenceType target : rootType.getReplacementSequence()) {
+        public List<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> linearize(RootType rootType) {
+            List<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> result = new ArrayList<>();
+            for (azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType target : rootType.getReplacementSequence()) {
                 result.add(target);
             }
             for (MessageType messageType : rootType.getProcessor().getMessage()) {
-                for (ReplacementSequenceType target : messageType.getReplacementSequences().getReplacementSequence()) {
+                for (azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType target : messageType.getReplacementSequences().getReplacementSequence()) {
                     result.add(target);
                 }
             }
@@ -36,10 +35,10 @@ public interface Linearizer<T> {
         }
     }
 
-    static class RuleSequenceTypeLinearizer implements Linearizer<RuleSequenceType> {
-        private static final RuleSequenceTypeLinearizer INSTANCE = new RuleSequenceTypeLinearizer();
+    static class toRuleSequenceType implements Linearizer<RuleSequenceType> {
+        private static final toRuleSequenceType INSTANCE = new toRuleSequenceType();
 
-        public static RuleSequenceTypeLinearizer getInstance() {
+        public static toRuleSequenceType getInstance() {
             return INSTANCE;
         }
 
@@ -59,7 +58,6 @@ public interface Linearizer<T> {
     }
 
     static class Methods {
-
         static <T> Map<String, T> toMap(List<T> list, NameExtractor<T> nameExtractor) {
             Map<String, T> map = new HashMap<>();
             for (T t : list) {
