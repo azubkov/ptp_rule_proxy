@@ -4,6 +4,7 @@ import azoo.com.ptp_rule_proxy.generated.MessageType;
 import azoo.com.ptp_rule_proxy.generated.RootType;
 import azoo.com.ptp_rule_proxy.generated.RuleSequenceType;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Linearizer<T> {
+    @NotNull
     List<T> linearize(RootType rootType);
 
     static class toReplacementSequenceType implements Linearizer<azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType> {
@@ -58,7 +60,8 @@ public interface Linearizer<T> {
     }
 
     static class Methods {
-        static <T> Map<String, T> toMap(List<T> list, NameExtractor<T> nameExtractor) {
+        @NotNull
+        static <T> Map<String, T> toMap(@NotNull List<T> list, @NotNull NameExtractor<T> nameExtractor) {
             Map<String, T> map = new HashMap<>();
             for (T t : list) {
                 String s = nameExtractor.getName(t);

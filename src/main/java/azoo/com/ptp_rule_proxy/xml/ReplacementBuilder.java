@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 public class ReplacementBuilder implements InitializingBean {
     private static final Logger LOGGER = Logger.getLogger(ReplacementBuilder.class);
@@ -50,20 +51,18 @@ public class ReplacementBuilder implements InitializingBean {
     private ReplacementWrapper toWrapper(RootType rootType) {
         ReplacementWrapper replacementWrapper = new ReplacementWrapper();
         replacementWrapper.setRootType(rootType);
-        List<ReplacementSequenceType> list = Linearizer.toReplacementSequenceType.getInstance().linearize(rootType);
-//        Linearizer.Methods.toMap(list, )
-//        replacementWrapper.
-        List<RuleSequenceType> list2 = Linearizer.toRuleSequenceType.getInstance().linearize(rootType);
+        {
+            List<ReplacementSequenceType> list = Linearizer.toReplacementSequenceType.getInstance().linearize(rootType);
+            Map<String, ReplacementSequenceType> map = Linearizer.Methods.toMap(list, NameExtractor.toReplacementSequenceType.getInstance());
+            replacementWrapper.setReplacementSequenceTypeMap(map);
+        }
+        {
+            List<RuleSequenceType> list = Linearizer.toRuleSequenceType.getInstance().linearize(rootType);
+            Map<String, RuleSequenceType> map = Linearizer.Methods.toMap(list, NameExtractor.toRuleSequenceType.getInstance());
+            replacementWrapper.setRuleSequenceTypeMap(map);
+        }
 
-//        List<RuleSequenceType> ruleSequenceList= toLinearRuleSequence(rootType);
-//        toLinearReplacementSequence(rootType);
         return replacementWrapper;
-    }
-
-    private void toLinear(RootType rootType) {
-        rootType.getRuleSequence();
-        rootType.getReplacementSequence();
-
     }
 
     public ReplacementWrapper toReplacement(@Nullable String xml) {
