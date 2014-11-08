@@ -15,13 +15,12 @@ public interface Linearizer<T> {
         @Override
         public List<ReplacementSequenceType> linearize(RootType rootType) {
             List<ReplacementSequenceType> result = new ArrayList<>();
-            for (ReplacementSequenceType replacementSequenceType : rootType.getReplacementSequence()) {
-                result.add(replacementSequenceType);
+            for (ReplacementSequenceType target : rootType.getReplacementSequence()) {
+                result.add(target);
             }
-            rootType.getReplacementSequence();
             for (MessageType messageType : rootType.getProcessor().getMessage()) {
-                for (ReplacementSequenceType replacementSequenceType : messageType.getReplacementSequences().getReplacementSequence()) {
-                    result.add(replacementSequenceType);
+                for (ReplacementSequenceType target : messageType.getReplacementSequences().getReplacementSequence()) {
+                    result.add(target);
                 }
             }
             return result;
@@ -31,7 +30,16 @@ public interface Linearizer<T> {
     static class FromRuleSequenceType implements Linearizer<RuleSequenceType> {
         @Override
         public List<RuleSequenceType> linearize(RootType rootType) {
-            return null;
+            List<RuleSequenceType> result = new ArrayList<>();
+            for (RuleSequenceType target : rootType.getRuleSequence()) {
+                result.add(target);
+            }
+            for (MessageType messageType : rootType.getProcessor().getMessage()) {
+                for (RuleSequenceType target : messageType.getRuleSequences().getRuleSequence()) {
+                    result.add(target);
+                }
+            }
+            return result;
         }
     }
 }
