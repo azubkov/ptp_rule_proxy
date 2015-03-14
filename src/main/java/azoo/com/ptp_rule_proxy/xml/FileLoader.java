@@ -92,12 +92,20 @@ public class FileLoader {
             return content;
         }
         /*as we reach this point exceptions printout required*/
-        throw new Exception(String.join("\n[or?] ", es[0].getMessage(), es[1].getMessage(), es[2].getMessage()));
+        LOGGER.error("Failed to restore from path: " + path);
+        for (Exception e : es) {
+            LOGGER.error(e, e);
+        }
+        return null;
     }
 
     @Nullable
     public String readContentSafely(String path) {
         try {
+            if (path == null) {
+                LOGGER.warn("attempt to load null-reference path");
+                return null;
+            }
             String string = readContent(path);
             return string;
         } catch (Exception e) {
