@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root>
+    <ruleSequence name="isExampleDomainResponse">
+        <!--http://www.example.com/-->
+        <rule type="contains" text="Example Domain"/>
+        <!--<rule type="and"/>-->
+        <!--as we are looking for response only-->
+        <rule type="contains" text="200 OK"/>
+    </ruleSequence>
+    <processor>
+        <message>
+            <ruleSequences>
+                <ruleSequence reference="$isExampleDomainResponse"/>
+            </ruleSequences>
+        </message>
+        <message>
+            <ruleSequences>
+                <ruleSequence reference="$isExampleDomainResponse"/>
+            </ruleSequences>
+        </message>
+    </processor>
+</root>

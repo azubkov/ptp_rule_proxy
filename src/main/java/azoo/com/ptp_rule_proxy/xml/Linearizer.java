@@ -28,7 +28,13 @@ public interface Linearizer<T> {
             for (azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType target : rootType.getReplacementSequence()) {
                 result.add(target);
             }
+            if (rootType.getProcessor().getMessage() == null) {
+                return result;
+            }
             for (MessageType messageType : rootType.getProcessor().getMessage()) {
+                if (messageType.getReplacementSequences() == null) {
+                    continue;
+                }
                 for (azoo.com.ptp_rule_proxy.generated.ReplacementSequenceType target : messageType.getReplacementSequences().getReplacementSequence()) {
                     result.add(target);
                 }
