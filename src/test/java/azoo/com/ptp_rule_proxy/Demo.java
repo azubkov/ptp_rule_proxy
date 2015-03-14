@@ -27,8 +27,8 @@ public class Demo {
         System.err.println("string: " + string);
     }
 
-    @Test
-    public void test_DollarReplacement() throws Exception {
+    @Test(expected = IllegalArgumentException.class)
+    public void test_duplicateName() throws Exception {
         String xml = fileLoader.readContent("ptpxml/demo_1.xml");
         ReplacementWrapper replacementWrapper = replacementBuilder.toReplacement(xml);
         System.err.println("replacementWrapper: " + replacementWrapper);
